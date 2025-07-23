@@ -20,7 +20,6 @@ def execute_query(query, params=(), fetchone=False, commit=False):
     """Executes a SQL query with parameters."""
     conn = get_db_connection()
     cursor = conn.cursor()
-
     result = None
     cursor.execute(query, params)
     if fetchone:
@@ -29,7 +28,6 @@ def execute_query(query, params=(), fetchone=False, commit=False):
         result = cursor.fetchall()
     if commit:
         conn.commit()
-
     if os.environ.get("FLASK_ENV") != "testing":
         conn.close()
 
