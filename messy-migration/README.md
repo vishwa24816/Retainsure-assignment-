@@ -7,7 +7,6 @@ You've inherited a legacy user management API that works but has significant iss
 
 ### Prerequisites
 - Python 3.8+ installed
-- 3 hours of uninterrupted time
 
 ### Setup (Should take < 5 minutes)
 ```bash
@@ -19,10 +18,10 @@ cd messy-migration
 pip install -r requirements.txt
 
 # Initialize the database
-python init_db.py
+python src/init_db.py
 
 # Start the application
-python app.py
+python src/app.py
 
 # The API will be available at http://localhost:5000
 ```
@@ -37,6 +36,11 @@ The application provides these endpoints:
 - `DELETE /user/<id>` - Delete user
 - `GET /search?name=<name>` - Search users by name
 - `POST /login` - User login
+
+To run the tests, run the following command from the `messy-migration` directory:
+```bash
+python -m unittest tests/test_app.py
+```
 
 ## Your Task
 
