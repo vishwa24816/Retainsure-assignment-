@@ -45,14 +45,11 @@ def update_user(user_id):
     data = request.get_json()
     if not data or ('name' not in data and 'email' not in data):
         return jsonify({"error": "Invalid data"}), 400
-
     user = execute_query("SELECT * FROM users WHERE id = ?", (user_id,), fetchone=True)
     if not user:
         return jsonify({"error": "User not found"}), 404
-
     name = data.get('name', user['name'])
     email = data.get('email', user['email'])
-
     execute_query("UPDATE users SET name = ?, email = ? WHERE id = ?", (name, email, user_id), commit=True)
     return jsonify({"message": "User updated"})
 
@@ -61,7 +58,6 @@ def delete_user(user_id):
     user = execute_query("SELECT * FROM users WHERE id = ?", (user_id,), fetchone=True)
     if not user:
         return jsonify({"error": "User not found"}), 404
-
     execute_query("DELETE FROM users WHERE id = ?", (user_id,), commit=True)
     return jsonify({"message": "User deleted"})
 
@@ -70,7 +66,6 @@ def search_users():
     name = request.args.get('name')
     if not name:
         return jsonify({"error": "Please provide a name to search"}), 400
-
     users = execute_query("SELECT id, name, email FROM users WHERE name LIKE ?", ('%' + name + '%',))
     return jsonify([dict(user) for user in users])
 
@@ -82,7 +77,6 @@ def login():
 
     email = data['email']
     password = data['password']
-
     user = execute_query("SELECT * FROM users WHERE email = ?", (email,), fetchone=True)
 
     if user and check_password(password, user['password']):
