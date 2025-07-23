@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
-from .database import execute_query
-from .utils import hash_password, check_password
+from database import execute_query
+from utils import hash_password, check_password
 
 bp = Blueprint('routes', __name__)
 

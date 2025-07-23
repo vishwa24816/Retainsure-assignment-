@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Management System</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        h1 { color: #333; }
+        .container { max-width: 600px; margin: auto; }
+        input, button { margin: 5px 0; padding: 8px; width: 100%; }
+        .result { background: #f9f9f9; padding: 10px; margin-top: 10px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>User Management System</h1>
+    <h2>Get All Users</h2>
+    <button onclick="getAllUsers()">Fetch Users</button>
+    <div id="users" class="result"></div>
+
+    <h2>Create User</h2>
+    <input id="name" placeholder="Name">
+    <input id="email" placeholder="Email">
+    <input id="password" type="password" placeholder="Password">
+    <button onclick="createUser()">Create User</button>
+    <div id="createResult" class="result"></div>
+
+    <h2>Login</h2>
+    <input id="loginEmail" placeholder="Email">
+    <input id="loginPassword" type="password" placeholder="Password">
+    <button onclick="loginUser()">Login</button>
+    <div id="loginResult" class="result"></div>
+</div>
+<script>
+const api = 'http://localhost:5000';
+function getAllUsers() {
+    fetch(api + '/users')
+        .then(res => res.json())
+        .then(data => {
+            document.getElementById('users').innerText = JSON.stringify(data, null, 2);
+        });
+}
+function createUser() {
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    fetch(api + '/users', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, password })
+    })
+    .then(res => res.json())
+    .then(data => {
+        document.getElementById('createResult').innerText = JSON.stringify(data, null, 2);
+    });
+}
+function loginUser() {
+    const email = document.getElementById('loginEmail').value;
+    const password = document.getElementById('loginPassword').value;
+    fetch(api + '/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+    })
+    .then(res => res.json())
+    .then(data => {
+        document.getElementById('loginResult').innerText = JSON.stringify(data, null, 2);
+    });
+}
+</script>
+</body>
+</html>
