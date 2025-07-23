@@ -22,8 +22,6 @@ users = [
 for name, email, password in users:
     hashed_password = hash_password(password)
     cursor.execute("INSERT INTO users (name, email, password) VALUES (?, ?, ?)", (name, email, hashed_password))
-
 conn.commit()
 conn.close()
-
 print("Database initialized with sample data")
