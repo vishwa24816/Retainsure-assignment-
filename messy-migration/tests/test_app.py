@@ -2,7 +2,6 @@ import unittest
 import json
 from src.app import create_app
 from src.database import execute_query
-
 import os
 
 class AppTestCase(unittest.TestCase):
