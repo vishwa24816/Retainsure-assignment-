@@ -10,7 +10,7 @@ You've inherited a legacy user management API that works but has significant iss
 
 ### Setup (Should take < 5 minutes)
 ```bash
-# Clone/download this repository
+# Clone or download this repository
 # Navigate to the assignment directory
 cd messy-migration
 
@@ -42,7 +42,7 @@ To run the tests, run the following command from the `messy-migration` directory
 python -m unittest tests/test_app.py
 ```
 
-## Your Task
+## Task
 
 ### Time Limit: 3 Hours
 
